@@ -1,0 +1,30 @@
+---
+  - hosts: all
+    sudo: yes
+    gather_facts: no
+    tasks:
+      - name: download file with sha256 check
+        get_url: url='https://s3.amazonaws.com/infra-assessment/static.zip'  dest=/tmp/static.zip sha256sum=4c819fcfc27d6896359290eb96529759500b2d58a9f76ce4b33305631653b016
+      - name: ensure /usr/share/nginx/www is present
+        file: dest=/usr/share/nginx/www mode=0755 state=directory
+      - name: Update update_cache
+        apt: update_cache=yes
+      - name: install nginx
+        apt: name="{{ item }}" state=installed
+        with_items:
+          - nginx
+          - vim
+          - unzip
+      - name: Copy the site in place
+        unarchive: src=/tmp/static.zip dest=/usr/share/nginx/www copy=no
+      - name: Copy nginx config
+        copy: dest=/etc/nginx/sites-available/companyNews src=files/companyNews owner=root group=root mode=0644
+      - name: enable nginx config
+        command: ln -s ../sites-available/companyNews
+        args:
+          chdir: /etc/nginx/sites-enabled
+          creates: /etc/nginx/sites-enabled/companyNews
+      - name: ensure default nginx config absent
+        file: dest=/etc/nginx/sites-enabled/default state=absent
+      - name: Start nginx
+        service: name=nginx state=started
