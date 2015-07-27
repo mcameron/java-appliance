@@ -2,67 +2,75 @@
   "tests": [
     {
       "name": "Company News root redirect",
-      "protocol": "http",
-      "port": 80,
-      "url": "/",
-      "method": "get",
-      "request_headers": {
-        "User-Agent": "Smolder smoke test library"
+      "uri": "/",
+      "inputs": {
+        "headers": {
+          "User-Agent": "Smolder smoke test library"
+        }
       },
-      "expect_status_code": 302,
-      "response_redirect": "http://localhost/companyNews/"
+      "outcomes": {
+        "expect_status_code": 302,
+        "response_redirect": "http://localhost/companyNews/"
+      }
     },
     {
       "name": "Company News logo",
-      "protocol": "http",
-      "port": 80,
-      "url": "/static/images/logo.png",
+      "uri": "/static/images/logo.png",
       "method": "get",
-      "request_headers": {
-        "User-Agent": "Smolder smoke test library"
+      "inputs": {
+        "headers": {
+          "User-Agent": "Smolder smoke test library"
+        }
       },
-      "expect_status_code": 200
+      "outcomes": {
+        "expect_status_code": 200
+      }
     },
     {
       "name": "Company News logo redirect",
-      "protocol": "http",
-      "port": 80,
-      "url": "/images/logo.png",
+      "uri": "/images/logo.png",
       "method": "get",
-      "request_headers": {
-        "User-Agent": "Smolder smoke test library"
+      "inputs": {
+        "headers": {
+          "User-Agent": "Smolder smoke test library"
+        }
       },
-      "expect_status_code": 200
+      "outcomes": {
+        "expect_status_code": 200
+      }
     },
     {
       "name": "Send post",
-      "protocol": "http",
-      "port": 80,
-      "url": "/companyNews/Post.action",
+      "uri": "/companyNews/Post.action",
       "method": "post",
-      "request_headers": {
-        "Host": "localhost",
-        "Referer": "http://localhost/companyNews/Post.action",
-        "User-Agent": "Smolder smoke test library",
-        "Content-Type": "application/json"
+      "inputs": {
+        "headers": {
+          "Host": "localhost",
+          "Referer": "http://localhost/companyNews/Post.action",
+          "User-Agent": "Smolder smoke test library",
+          "Content-Type": "application/json"
+        },
+        "data": {
+          "title": "Test",
+          "body": "Lorem ipsum"
+        }
       },
-      "data": {
-        "title": "Test",
-        "body": "Lorem ipsum"
-      },
-      "expect_status_code": 302
+      "outcomes": {
+        "expect_status_code": 302
+      }
     },
     {
       "name": "Read posts",
-      "protocol": "http",
-      "port": 80,
-      "url": "/companyNews/Read.action",
-      "method": "get",
-      "request_headers": {
-        "User-Agent": "Smolder smoke test library"
+      "uri": "/companyNews/Read.action",
+      "inputs": {
+        "headers": {
+          "User-Agent": "Smolder smoke test library"
+        }
       },
-      "expect_status_code": 200,
-      "response_body_contains": "Lorem"
+      "outcomes": {
+        "expect_status_code": 200,
+        "response_body_contains": "Lorem"
+      }
     }
   ]
 }
