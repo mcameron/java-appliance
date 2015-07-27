@@ -14,7 +14,7 @@ apache
 Install
 -------
 ```
-git clone git@github.com:mcameron/java-appliance.git
+git clone https://github.com/mcameron/java-appliance.git
 cd java-appliance
 vagrant up
 ```
@@ -44,5 +44,5 @@ https://github.com/sky-shiny/smolder
 Run tests against http://localhost/ as follows:
 
 ```
-smolder-cli localhost tests/companyNews.json --force
+smolder localhost tests/companyNews.json --force
 ```
