@@ -18,6 +18,22 @@ boxes = [{
     :to_port => 8080
   },
   {
+    :name => 'dynamic2',
+    :box => 'dynamic2',
+    :box_url => 'http://files.vagrantup.com/precise32.box',
+    :ip => '192.168.202.30',
+    :autostart => 'true',
+    :ssh_port => 2230,
+    :cpus => 1,
+    :cpu_percentage => 25,
+    :memory => 512,
+    :network  => 'public_network',
+    :Controller => 'SATA Controller',
+    :playbook => 'dynamic.yml',
+    :from_port => 8883,
+    :to_port => 8080
+  },
+  {
     :name => 'static',
     :box => 'static',
     :box_url => 'http://files.vagrantup.com/precise32.box',
@@ -49,7 +65,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             config.vm.box = box[:box]
             config.vm.box_check_update = true
             config.vm.box_url = box[:box_url] if box[:box_url]
-            config.vm.network "forwarded_port", guest: box[:to_port], host: box[:from_port]
+            config.vm.network :forwarded_port, guest: box[:to_port], host: box[:from_port]
             config.vm.network "private_network", ip: box[:ip]
             config.vm.share_folder  "stuff", "/usr/local/stuff", "~/Projects/stuff", :nfs => true if box[:shares]
             config.vm.provision :ansible do |ansible|

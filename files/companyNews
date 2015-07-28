@@ -1,3 +1,8 @@
+upstream company_news  {
+  server 192.168.202.20:8080 max_fails=1 fail_timeout=10s;
+  server 192.168.202.30:8080 max_fails=1 fail_timeout=10s;
+}
+
 server {
     server_name localhost;
     root /usr/share/nginx/www;
@@ -17,6 +22,6 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header Host $host;
-        proxy_pass http://192.168.202.20:8080;
+        proxy_pass http://company_news;
     }
 }
