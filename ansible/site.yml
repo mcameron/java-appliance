@@ -1,13 +1,16 @@
 ---
 - hosts: static
   sudo: yes
-  gather_facts: no
+  pre_tasks:
+    - debug: var="{{ ansible_all_ipv4_addresses }}"
   roles:
     - static
+
 - hosts:
     - dynamic
     - dynamic2
   sudo: yes
-  gather_facts: no
+  pre_tasks:
+    - debug: var="{{ ansible_all_ipv4_addresses }}"
   roles:
     - dynamic
