@@ -13,7 +13,6 @@ boxes = [{
     :memory => 512,
     :network  => 'public_network',
     :Controller => 'SATA Controller',
-    :playbook => 'dynamic.yml',
     :from_port => 8881,
     :to_port => 8080
   },
@@ -29,7 +28,6 @@ boxes = [{
     :memory => 512,
     :network  => 'public_network',
     :Controller => 'SATA Controller',
-    :playbook => 'dynamic.yml',
     :from_port => 8883,
     :to_port => 8080
   },
@@ -45,7 +43,6 @@ boxes = [{
     :memory => 512,
     :network  => 'public_network',
     :Controller => 'SATA Controller',
-    :playbook => 'static.yml',
     :from_port => 8882,
     :to_port => 80
   }
@@ -68,11 +65,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             config.vm.network :forwarded_port, guest: box[:to_port], host: box[:from_port]
             config.vm.network "private_network", ip: box[:ip]
             config.vm.share_folder  "stuff", "/usr/local/stuff", "~/Projects/stuff", :nfs => true if box[:shares]
-            config.vm.provision :ansible do |ansible|
-                ansible.verbose = "v"
-                ansible.sudo = true
-                ansible.playbook = box[:playbook]
-            end
         end
+    end
+    config.vm.provision :ansible do |ansible|
+        ansible.verbose = "v"
+        ansible.sudo = true
+        ansible.playbook = 'ansible/site.yml'
     end
 end
