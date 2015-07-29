@@ -1,9 +1,6 @@
 #!/bin/bash
 
-echo 'Persons authorised by British Sky Broadcasting Ltd may use this computer
-network. By completing the login process you are acknowledging and consenting
-to proper use of BSkyB's computing systems in accordance with the company's
-usage policy. Copies of this can be found on the intranet. If you are not an
+echo 'Authorized persons may use this computer network. If you are not an
 authorised user please disconnect now.'
 
 THRESHOLD=90
