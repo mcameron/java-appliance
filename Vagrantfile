@@ -73,9 +73,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                 ansible.sudo = true
                 ansible.playbook = box[:playbook]
             end
+            if config.vm.box == 'static'
+            config.vm.provision :shell,
+                inline: "bash -c 'nc -z 127.0.0.1 80'"
+                config.trigger.after :provision do
+                    run "smolder localhost tests/companyNews.json"
+                end
+            end
         end
     end
-    config.trigger.after :provision do
-        run "smolder localhost tests/companyNews.json"
-    end
+
 end

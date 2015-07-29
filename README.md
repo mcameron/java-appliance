@@ -6,6 +6,7 @@ Requirements
 
 ```
 vagrant
+vagrant-triggers
 ansible
 virtualbox
 apache
