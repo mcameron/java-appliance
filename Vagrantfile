@@ -3,8 +3,8 @@ VAGRANTFILE_API_VERSION = "2"
 
 boxes = [{
     :name => 'dynamic',
-    :box => 'dynamic',
-    :box_url => 'http://files.vagrantup.com/precise32.box',
+    :box => 'puppetlabs/ubuntu-14.04-64-nocm',
+    :box_url => 'https://vagrantcloud.com/puppetlabs/boxes/ubuntu-14.04-64-nocm',
     :ip => '192.168.202.20',
     :autostart => 'true',
     :ssh_port => 2210,
@@ -13,14 +13,14 @@ boxes = [{
     :memory => 512,
     :network  => 'public_network',
     :Controller => 'SATA Controller',
-    :playbook => 'dynamic.yml',
+    :playbook => 'ansible/dynamic.yml',
     :from_port => 8881,
     :to_port => 8080
   },
   {
     :name => 'dynamic2',
-    :box => 'dynamic2',
-    :box_url => 'http://files.vagrantup.com/precise32.box',
+    :box => 'puppetlabs/ubuntu-14.04-64-nocm',
+    :box_url => 'https://vagrantcloud.com/puppetlabs/boxes/ubuntu-14.04-64-nocm',
     :ip => '192.168.202.30',
     :autostart => 'true',
     :ssh_port => 2230,
@@ -29,14 +29,14 @@ boxes = [{
     :memory => 512,
     :network  => 'public_network',
     :Controller => 'SATA Controller',
-    :playbook => 'dynamic.yml',
+    :playbook => 'ansible/dynamic.yml',
     :from_port => 8883,
     :to_port => 8080
   },
   {
     :name => 'static',
-    :box => 'static',
-    :box_url => 'http://files.vagrantup.com/precise32.box',
+    :box => 'puppetlabs/ubuntu-14.04-64-nocm',
+    :box_url => 'https://vagrantcloud.com/puppetlabs/boxes/ubuntu-14.04-64-nocm',
     :autostart => 'true',
     :ip => '192.168.202.10',
     :ssh_port => 2220,
@@ -45,7 +45,7 @@ boxes = [{
     :memory => 512,
     :network  => 'public_network',
     :Controller => 'SATA Controller',
-    :playbook => 'static.yml',
+    :playbook => 'ansible/static.yml',
     :from_port => 8882,
     :to_port => 80
   }

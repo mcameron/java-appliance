@@ -1,0 +1,11 @@
+---
+    - name: add disk checks to motd
+      copy: src=../files/motd.sh dest=/etc/update-motd.d/20-diskspace mode=0755 owner=root group=root
+    - name: remove canonical advertising
+      file: path=/etc/update-motd.d/50-landscape-sysinfo state=absent
+    - name: remove more canonical advertising
+      file: path=/etc/update-motd.d/51-cloudguest state=absent
+    - name: remove dumb doc link
+      file: path=/etc/update-motd.d/10-help-text state=absent
+    # - name: add autologout to profile.d
+    #   copy: src=../files/Z88-timeout.sh dest=/etc/profile.d/Z88-timeout.sh mode=0755 owner=root group=root

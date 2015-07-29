@@ -1,0 +1,27 @@
+upstream company_news  {
+  server 192.168.202.20:8080 max_fails=1 fail_timeout=10s;
+  server 192.168.202.30:8080 max_fails=1 fail_timeout=10s;
+}
+
+server {
+    server_name localhost;
+    root /usr/share/nginx/www;
+    index index.html index.htm;
+    error_page 500 502 503 504  /50x.html;
+    location /static/{
+    }
+    location /{
+        try_files $uri $uri/;
+        rewrite ^/$ /companyNews last;
+        rewrite ^(.*).png$ /static/$1.png last;
+        rewrite ^(.*).css$ /static/$1.css last;
+    }
+    location /companyNews{
+        rewrite ^/companyNews/(.*).png$ /$1.png last;
+        rewrite ^/companyNews/(.*).css$ /$1.css last;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $host;
+        proxy_pass http://company_news;
+    }
+}

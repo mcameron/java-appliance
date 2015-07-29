@@ -1,0 +1,22 @@
+---
+# Install common packages
+    - name: Update update_cache
+      apt: update_cache=yes
+    - name: install apt packages
+      apt: name={{ item }}
+      with_items:
+        - htop
+        - vim-tiny
+        - curl
+        - git
+        - unzip
+        - update-motd
+        - ssh-askpass
+        - gcc
+        - python-dev
+        - libxml2
+        - libxml2-dev
+        - libxslt-dev
+        - python-lxml
+        - python-pip
+        - mysql-client-core-5.5
