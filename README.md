@@ -14,6 +14,7 @@ apache
 Install
 -------
 ```
+vagrant plugin install vagrant-triggers
 git clone https://github.com/mcameron/java-appliance.git
 cd java-appliance
 vagrant up

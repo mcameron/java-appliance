@@ -75,4 +75,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             end
         end
     end
+    config.trigger.after :provision do
+        run "smolder localhost tests/companyNews.json"
+    end
 end

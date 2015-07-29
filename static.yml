@@ -19,12 +19,20 @@
         unarchive: src=/tmp/static.zip dest=/usr/share/nginx/www copy=no
       - name: Copy nginx config
         copy: dest=/etc/nginx/sites-available/companyNews src=files/companyNews owner=root group=root mode=0644
+        notify:
+          - start nginx
       - name: enable nginx config
         command: ln -s ../sites-available/companyNews
         args:
           chdir: /etc/nginx/sites-enabled
           creates: /etc/nginx/sites-enabled/companyNews
+        notify:
+          - start nginx
       - name: ensure default nginx config absent
         file: dest=/etc/nginx/sites-enabled/default state=absent
-      - name: Start nginx
-        service: name=nginx state=started
+        notify:
+          - start nginx
+
+    handlers:
+      - name: start nginx
+        service: name=nginx state=restarted

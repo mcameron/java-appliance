@@ -16,7 +16,6 @@
     {
       "name": "Company News logo",
       "uri": "/static/images/logo.png",
-      "method": "get",
       "inputs": {
         "headers": {
           "User-Agent": "Smolder smoke test library"
@@ -29,7 +28,6 @@
     {
       "name": "Company News logo redirect",
       "uri": "/images/logo.png",
-      "method": "get",
       "inputs": {
         "headers": {
           "User-Agent": "Smolder smoke test library"
@@ -37,39 +35,6 @@
       },
       "outcomes": {
         "expect_status_code": 200
-      }
-    },
-    {
-      "name": "Send post",
-      "uri": "/companyNews/Post.action",
-      "method": "post",
-      "inputs": {
-        "headers": {
-          "Host": "localhost",
-          "Referer": "http://localhost/companyNews/Post.action",
-          "User-Agent": "Smolder smoke test library",
-          "Content-Type": "application/json"
-        },
-        "data": {
-          "title": "Test",
-          "body": "Lorem ipsum"
-        }
-      },
-      "outcomes": {
-        "expect_status_code": 302
-      }
-    },
-    {
-      "name": "Read posts",
-      "uri": "/companyNews/Read.action",
-      "inputs": {
-        "headers": {
-          "User-Agent": "Smolder smoke test library"
-        }
-      },
-      "outcomes": {
-        "expect_status_code": 200,
-        "response_body_contains": "Lorem"
       }
     }
   ]
