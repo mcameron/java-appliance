@@ -67,18 +67,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             config.vm.box_url = box[:box_url] if box[:box_url]
             config.vm.network :forwarded_port, guest: box[:to_port], host: box[:from_port]
             config.vm.network "private_network", ip: box[:ip]
-            config.vm.share_folder  "stuff", "/usr/local/stuff", "~/Projects/stuff", :nfs => true if box[:shares]
+            config.vm.share_folder "stuff", "/usr/local/stuff", "~/Projects/stuff", :nfs => true if box[:shares]
             config.vm.provision :ansible do |ansible|
                 ansible.verbose = "v"
                 ansible.sudo = true
                 ansible.playbook = box[:playbook]
             end
             if config.vm.box == 'static'
+            config.ssh.pty = true
             config.vm.provision :shell,
                 inline: "bash -c 'nc -z 127.0.0.1 80'"
-                config.trigger.after :provision do
-                    run "smolder localhost tests/companyNews.json"
-                end
+            end
+            config.trigger.after :provision do
+                run "smolder localhost tests/companyNews.json"
             end
         end
     end
