@@ -31,7 +31,7 @@ sudo apachectl start
 This will forward port 80 on your local machine to port 8882 where the site is running.
 
 ```
-pip install git+git://github.com/sky-shiny/smolder.git
+pip install git+https://github.com/sky-shiny/smolder.git
 vagrant plugin install vagrant-triggers
 git clone https://github.com/mcameron/java-appliance.git
 cd java-appliance
